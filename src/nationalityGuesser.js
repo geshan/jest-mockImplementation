@@ -9,8 +9,7 @@ export async function guessNationalities(name) {
     console.log('Done!');
   } catch (err) {
     console.error(`Error occurred: ${err.message}`, err.stack);
-  } finally {
-    process.exit(0);
+    process.exit(1);
   }
 }
 
