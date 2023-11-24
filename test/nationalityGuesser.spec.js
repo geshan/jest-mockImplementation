@@ -3,6 +3,10 @@ import axios from 'axios';
 jest.mock('axios');
 
 describe('guessNationalities', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+    //without the above reset, in the second test it will take axios.get as the second call
+  });
   it('should return the nationality based on the name', async () => {
     const name = 'john';
     const consoleLog = jest.spyOn(console, "log").mockImplementationOnce(() => { });
