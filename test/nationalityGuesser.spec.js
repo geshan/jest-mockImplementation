@@ -5,18 +5,19 @@ jest.mock('axios');
 describe('guessNationalities', () => {
   it('should return the nationality based on the name', async () => {
     const name = 'john';
-    const consoleLog = jest.spyOn(console, "log").mockImplementationOnce(() => {});
-  
-    axios.get.mockResolvedValue({ data: {
-      count: 2346926,
-      name: 'john',
-      country: [
-        { country_id: 'IE', probability: 0.075 },
-        { country_id: 'KE', probability: 0.055 },
-        { country_id: 'GB', probability: 0.049 },
-        { country_id: 'PH', probability: 0.045 },
-        { country_id: 'AU', probability: 0.045 }
-      ]      
+    const consoleLog = jest.spyOn(console, "log").mockImplementationOnce(() => { });
+
+    axios.get.mockResolvedValue({
+      data: {
+        count: 2346926,
+        name: 'john',
+        country: [
+          { country_id: 'IE', probability: 0.075 },
+          { country_id: 'KE', probability: 0.055 },
+          { country_id: 'GB', probability: 0.049 },
+          { country_id: 'PH', probability: 0.045 },
+          { country_id: 'AU', probability: 0.045 }
+        ]
       }
     });
 
@@ -33,7 +34,7 @@ describe('guessNationalities', () => {
     const name = 'error';
 
     const processExit = jest.spyOn(process, 'exit').mockImplementation(() => { });
-    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => { });
     axios.get.mockRejectedValue(new Error('API error'));
 
     await guessNationalities(name);
